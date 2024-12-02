@@ -1,22 +1,287 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Dengan penuh rasa syukur dan bahagia, kami mengundang Anda untuk hadir dalam acara pernikahan kami."
+    />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      body {
+        max-width: 480px; /* Lebar maksimum untuk mobile (contoh iPhone) */
+        margin: 0 auto; /* Centering */
+        overflow-x: hidden; /* Sembunyikan scroll horizontal */
+        height: 100vh;
+        background-color: #ffc8c8;
+      }
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+      html {
+        font-family: system-ui, sans-serif;
+        background-color: #23262d;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="relative">
+    <slot />
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            console.log(entry.target.id);
+            setTimeout(() => {
+              entry.target.classList.add("show");
+            }, index * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+
+      const ornElements = document.querySelectorAll(".orn");
+      ornElements.forEach((orn) => {
+        observer.observe(orn);
+      });
+    </script>
+  </body>
+</html>
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+
+  @font-face {
+    font-family: "Melina";
+    src: url("/fonts/melina.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Samantha";
+    src: url("/fonts/samantha.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Chopin Script";
+    src: url("/fonts/chopin_script.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* styles.css */
+  @keyframes slideUpEnter {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUpLeave {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes slideDownEnter {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDownLeave {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Mengatur kelas untuk menggunakan font */
+  .melina {
+    font-family: "Melina", sans-serif; /* Fallback font */
+  }
+
+  /* Kelas untuk font Times New Roman */
+  .times-new-rowman {
+    font-family: "Times New Roman", Times, serif;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+
+  .monsieur-la-doulaise {
+    font-family: "Monsieur La Doulaise", cursive;
+  }
+
+  .great-vibes{
+    font-family: "Great Vibes", cursive;
+  }
+
+  .chopin-script {
+    font-family: "Chopin Script", cursive;
+  }
+
+  .samantha {
+    font-family: "Samantha", cursive;
+  }
+
+  .patrick-hand {
+    font-family: "Patrick Hand", cursive;
+  }
+
+  .text-shadow {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Efek bayangan teks */
+  }
+
+  .text-shadow-white {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.636); /* Efek bayangan teks */
+  }
+
+  .text-shadow-md {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Bayangan teks medium */
+  }
+
+  .text-shadow-lg {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); /* Bayangan teks besar */
+  }
+
+  /* Keyframes untuk animasi ornamen */
+  @keyframes ornamentAnimationXLeft {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ornamentAnimationXRight {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ornamentAnimationRotateLeft {
+    0% {
+      transform: rotate(0);
+    }
+    50% {
+      transform: rotate(-3deg);
+      transform-origin: 0% 100%;
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+
+  @keyframes ornamentAnimationRotateRight {
+    0% {
+      transform: rotate(0);
+    }
+    50% {
+      transform: rotate(3deg);
+      transform-origin: 0% 100%;
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+
+  /* Kelas animasi untuk ornamen */
+  .orn {
+    opacity: 0;
+    transform: translateY(20px);
+    scale: 0.1;
+    transition:
+      scale 1s ease-out,
+      opacity 1s ease-out,
+      transform 1s ease-out;
+  }
+
+  .orn.show {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+
+  /* Tambahkan animasi ornamen yang berjalan terus */
+  .orn-x-left {
+    animation: ornamentAnimationXLeft 3000ms infinite;
+  }
+
+  .orn-x-right {
+    animation: ornamentAnimationXRight 3000ms infinite;
+  }
+
+  .orn-rotate-left {
+    animation: ornamentAnimationRotateLeft 10000ms infinite;
+  }
+
+  .orn-rotate-right {
+    animation: ornamentAnimationRotateRight 10000ms infinite;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>

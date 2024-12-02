@@ -1,11 +1,1150 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Welcome from "../components/Welcome.astro";
+import Layout from "../layouts/Layout.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Mike Suhandani">
+  <section class="min-h-screen h-screen w-full relative bg" id="cover">
+    <div class="bg-black/50 w-full h-full absolute top-0"></div>
+    <div
+      class="absolute bottom-[120px] left-1/2 w-full transform -translate-x-1/2 text-center"
+    >
+      <p class="pb-2 orn">
+        <span class="times-new-rowman text-white" id="greeting"
+          >THE WEDDING OF</span
+        >
+      </p>
+      <p class="pb-2 orn">
+        <span
+          class="great-vibes text-white text-shadow-white text-4xl"
+          id="bride">Mike & Suhandani</span
+        >
+      </p>
+      <p class="pb-2 orn">
+        <span class="times-new-rowman text-white text-shadow" id="dear"
+          >Kepada Bpk/Ibu/Sdr/i,</span
+        >
+      </p>
+      <p class="pb-4 orn">
+        <span class="great-vibes text-white text-2xl" id="name"></span>
+      </p>
+      <button
+        id="open-invitation"
+        class="bg-[#d4afb9] mx-auto orn text-white font-semibold py-2 px-4 rounded-[100px] shadow-xl hover:bg-[#b0576f] transition flex items-center gap-2"
+      >
+        <i class="fas fa-envelope"></i>
+        <span class="times-new-rowman">Buka Undangan</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="hidden" id="content">
+    <section class="h-screen w-full relative" id="pembukaan">
+      <div id="storyImg" class="swiper">
+        <ul class="swiper-wrapper" data-cursor="swipe" id="storyFoto">
+          {
+            [1, 4, 5, 6, 7].map((i) => (
+              <li class="swiper-slide">
+                <div class="w-full h-screen">
+                  <img
+                    class="h-full w-full object-cover"
+                    src={`/images/${i}.jpeg`}
+                    alt="Image"
+                  />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="bg-black/30 w-full h-full absolute top-0 z-[999]"></div>
+      <div
+        class="absolute top-1/3 w-full transform -translate-y-1/2 w-full z-[1000] text-center"
+      >
+        <p class="pb-2 orn">
+          <span class="times-new-rowman text-white">THE WEDDING OF</span>
+        </p>
+        <p class="pb-2 orn">
+          <span
+            class="great-vibes text-white text-shadow-white text-4xl"
+            id="bride">Mike & Suhandani</span
+          >
+        </p>
+        <p class="pb-2 orn">
+          <span class="times-new-rowman text-white">22 Desember 2024</span>
+        </p>
+      </div>
+  
+      <script>
+        import "swiper/css";
+        import Swiper from "swiper";
+        import { register } from "swiper/element/bundle";
+        register();
+  
+        const swiper = new Swiper("#storyImg", {
+          // Setup
+          loop: true,
+          autoplay: true,
+          grabCursor: false,
+          mousewheel: false,
+          allowSlideNext: true,
+          allowSlidePrev: true,
+        });
+      </script>
+    </section>
+    <section
+      class="w-full bg-[#fcf4dd] relative overflow-x-hidden"
+      id="countdown"
+    >
+      <div class="w-full my-[32px] text-center">
+        <p class="great-vibes text-[32px] orn mb-4" id="countdown-title">
+          Hitung Mundur
+        </p>
+        <div class="flex justify-center gap-2">
+          <div
+            class="orn bg-[#d4afb9] text-white text-shadow-white text-2xl rounded-xl p-1 w-[64px]"
+          >
+            <span id="days" class="text-[16px]">00</span>
+            <p class="text-[12px]">Hari</p>
+          </div>
+          <div
+            class="orn bg-[#d4afb9] text-white text-shadow-white text-2xl rounded-xl p-1 w-[64px]"
+          >
+            <span id="hours" class="text-[16px]">00</span>
+            <p class="text-[12px]">Jam</p>
+          </div>
+          <div
+            class="orn bg-[#d4afb9] text-white text-shadow-white text-2xl rounded-xl p-1 w-[64px]"
+          >
+            <span id="minutes" class="text-[16px]">00</span>
+            <p class="text-[12px]">Menit</p>
+          </div>
+          <div
+            class="orn bg-[#d4afb9] text-white text-shadow-white text-2xl rounded-xl p-1 w-[64px]"
+          >
+            <span id="seconds" class="text-[16px]">00</span>
+            <p class="text-[12px]">Detik</p>
+          </div>
+        </div>
+      </div>
+      <button
+        id="add-calendar"
+        class="mb-4 bg-[#d4afb9] mx-auto orn text-white font-semibold py-2 px-4 rounded-[100px] shadow-xl hover:bg-[#b0576f] transition flex items-center gap-2"
+      >
+        <i class="fas fa-calendar"></i>
+        <span class="times-new-rowman">Tambahkan Kalender</span>
+      </button>
+      <script>
+        const times = "2024-12-22 10:00:00";
+        const countDownDate = new Date(times).getTime();
+  
+        const x = setInterval(() => {
+          const now = new Date().getTime();
+          const distance = countDownDate - now;
+  
+          if (distance >= 0) {
+            // Waktu masih berjalan, hitung countdown
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            );
+            const minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60),
+            );
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+            document.getElementById("days")!.innerHTML = `${days
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("hours")!.innerHTML = `${hours
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("minutes")!.innerHTML = `${minutes
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("seconds")!.innerHTML = `${seconds
+              .toString()
+              .padStart(2, "0")}`;
+          } else {
+            // Waktu telah selesai, hitung durasi yang telah berlalu
+            const elapsed = Math.abs(distance);
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+              (elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            );
+            const minutes = Math.floor(
+              (elapsed % (1000 * 60 * 60)) / (1000 * 60),
+            );
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+  
+            document.getElementById("countdown-title")!.innerText =
+              "Kami Bahagia Sejak";
+            document.getElementById("days")!.innerHTML = `${days
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("hours")!.innerHTML = `${hours
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("minutes")!.innerHTML = `${minutes
+              .toString()
+              .padStart(2, "0")}`;
+            document.getElementById("seconds")!.innerHTML = `${seconds
+              .toString()
+              .padStart(2, "0")}`;
+          }
+        }, 1000);
+      </script>
+    </section>
+    <section
+      class="w-full bg-[#f9f6f2] relative overflow-x-hidden"
+      id="kata-kata"
+    >
+      <p
+        class="p-6 pt-[50px] pb-[100px] ms-[100px] text-right patrick-hand text-[16px] orn"
+      >
+        <span class="times-new-rowman font-bold text-[18px]"
+          >Assalamu'alaikum Wr.Wb.</span
+        >
+        <br />
+        Dengan Memohon Rahmat dan Ridho Allah SWT.<br />Kami Bermaksud
+        Menyelenggarakan Syukuran Pernikahan Kami
+      </p>
+      <div class="absolute bottom-0 -left-[100px]">
+        <img
+          src="/images/mixed-flower.png"
+          class="w-[200px] h-[300px] object-cover orn"
+          alt=""
+        />
+      </div>
+  
+      <div class="absolute bottom-0 right-[20px]">
+        <img src="/images/orn-3.png" class="w-[200px] object-cover orn" alt="" />
+      </div>
+    </section>
+    <section class="min-h-screen bg-[#edf2fb] w-full relative" id="perkenalan">
+      <div class="absolute top-[40px] right-0">
+        <img src="/images/orn-1.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+  
+      <div class="absolute top-[200px] left-0 !-scale-x-100">
+        <img src="/images/orn-1.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+  
+      <div class="absolute bottom-0 right-0">
+        <img src="/images/orn-2.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+      <div class="absolute bottom-0 left-0 !-scale-x-100">
+        <img src="/images/orn-2.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+      <div class="py-8">
+        <div class="mt-4 w-full">
+          <img
+            src="/images/3.jpeg"
+            class="rounded-2xl w-[200px] mx-auto h-[300px] object-cover orn"
+            alt=""
+          />
+        </div>
+        <div class="mt-4 w-full">
+          <p class="text-center text-[32px] great-vibes mx-auto mt-2 orn">
+            Mike Syahriana
+          </p>
+          <p
+            class="text-center times-new-rowman mx-auto patrick-hand text-[16px] orn"
+          >
+            <span class="font-bold">Putri dari Bpk. Pendi & Alm. Ibu Tumirah</span
+            >
+            <br />
+            <span class="text-center font-light text-[12px]"
+              >Huntap Pagerjurang Kaliadem, Kepuharjo, Cangkringan, Sleman</span
+            >
+          </p>
+        </div>
+        <p class="text-center text-[52px] great-vibes mx-auto my-4 orn">&</p>
+        <div class="mt-4 w-full">
+          <img
+            src="/images/2.jpeg"
+            class="rounded-2xl w-[200px] mx-auto h-[300px] object-cover orn"
+            alt=""
+          />
+        </div>
+        <div class="mt-4 w-full">
+          <p class="text-center text-[32px] great-vibes mx-auto mt-2 orn">
+            Suhandani
+          </p>
+          <p
+            class="text-center times-new-rowman mx-auto patrick-hand text-[16px] orn"
+          >
+            <span class="font-bold">Putra dari Bpk. Sumbono & Ibu Sudarmi</span>
+            <br />
+            <span class="text-center font-light text-[12px]"
+              >Cancangan, Wukisari, Cangkringan, Sleman</span
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="w-full h-[350px] bg-[#f9f6f2] relative" id="kata-kata">
+      <div class="absolute -top-[1px] right-0 !-scale-y-100">
+        <img src="/images/orn-2.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+      <div class="absolute -top-[1px] left-0 !-scale-x-100 !-scale-y-100">
+        <img src="/images/orn-2.png" class="w-[100px] object-cover orn" alt="" />
+      </div>
+      <div class="absolute top-1/2 transform -translate-y-1/2">
+        <p class="px-[52px] text-center patrick-hand orn">
+          "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu
+          isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa
+          tenteram kepadanya, dan dijadikan-nya di antaramu rasa kasih dan sayang.
+          Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda
+          bagi kamu yang berpikir."
+        </p>
+        <br />
+        <p class="text-center patrick-hand orn">(QS. Ar-Rum: 21)</p>
+      </div>
+    </section>
+    <section
+      class="w-full min-h-screen relative bg-[#fce1e4] text-center py-[50px]"
+      id="date"
+    >
+      <p class="orn great-vibes text-[32px]">Save The Date</p>
+      <img
+        src="/images/4.jpeg"
+        class="orn rounded-xl w-[250px] h-[250px] object-cover mx-auto mt-4 shadow-2xl"
+        alt=""
+      />
+      <div class="w-full mt-4">
+        <p class="mx-auto great-vibes font-bold rounded text-[24px] mt-[32px]">
+          <span class="orn bg-[#fce1e4] px-5 py-2 rounded-full shadow"
+            >Resepsi</span
+          >
+        </p>
+  
+        <br />
+        <p class="orn text-center text-[18px] mt-4 px-6">
+          <span class="orn patrick-hand">Minggu, 22 Desember 2024</span>
+          <br />
+          <span class="orn patrick-hand">Pukul 10.00 WIB</span>
+          <br />
+          <br />
+          <span class="orn times-new-rowman text-[16px]"
+            >Huntap Pagerjurang Kaliadem, Kepuharjo, Cangkringan, Sleman</span
+          >
+        </p>
+        <button
+          id="view-maps"
+          class="my-4 bg-[#7ec4cf] mx-auto orn text-white font-semibold py-2 px-4 rounded-[100px] shadow-xl hover:bg-[#b0576f] transition flex items-center gap-2"
+        >
+          <i class="fas fa-location"></i>
+          <span class="times-new-rowman">Lihat Maps</span>
+        </button>
+      </div>
+    </section>
+    <section class="min-h-screen bg-[#edf2fb] w-full" id="story">
+      <div class="p-6 text-center">
+        <p class="great-vibes text-[32px] orn">Cerita Kita</p>
+        <img
+          src="/images/4.jpeg"
+          class="rounded-xl w-full h-[250px] object-cover mx-auto mt-4 shadow-2xl orn"
+          alt=""
+        />
+        <div class="w-full text-start">
+          <p class="great-vibes mt-2 text-[24px] orn">Pertama Berkenalan</p>
+          <p class="patrick-hand orn">Februari 2015</p>
+          <p class="patrick-hand text-[14px] orn">
+            Bertemu untuk pertama kalinya di sebuah perguruan bela diri di
+            padepokan rajawali. Seiring berjalannya waktu kami bertukar nomor hp
+            dan menjalin komunikasi.
+          </p>
+        </div>
+        <img
+          src="/images/5.jpeg"
+          class="rounded-xl w-full h-[250px] object-cover mx-auto mt-6 shadow-2xl orn"
+          alt=""
+        />
+        <div class="w-full text-start">
+          <p class="great-vibes mt-2 text-[24px] orn">Menjalin Hubungan</p>
+          <p class="patrick-hand orn">Maret 2017</p>
+          <p class="patrick-hand text-[14px] orn">
+            Kami sempat berkomunikasi beberapa bulan sampai menemukan kecocokan
+            akhirnya kami memutuskan untuk Menjalin sebuah komitmen.
+          </p>
+        </div>
+        <img
+          src="/images/6.jpeg"
+          class="rounded-xl w-full h-[250px] object-cover mx-auto mt-6 shadow-2xl orn"
+          alt=""
+        />
+        <div class="w-full text-start">
+          <p class="great-vibes mt-2 text-[24px] orn">Lamaran</p>
+          <p class="patrick-hand orn">April 2024</p>
+          <p class="patrick-hand text-[14px] orn">
+            Setelah Menjalin hubungan beberapa tahun, akhirnya kami memantapkan
+            hati untuk membawa hubungan ini ke jenjang lebih serius dan menua
+            bersama
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="w-full bg-[#f9f6f2] relative overflow-x-hidden" id="doa">
+      <p
+        class="p-6 pt-[50px] pb-[100px] me-[100px] text-left patrick-hand text-[16px] orn"
+      >
+        Tiada yang dapat kami ungkapkan selain rasa terimakasih dari hati yang
+        tulus apabila Bapak/Ibu/Sdr/i berkenan hadir untuk memberikan do'a restu
+        kepada kami.
+      </p>
+      <div class="absolute bottom-0 -right-[100px] !-scale-x-100">
+        <img
+          src="/images/mixed-flower.png"
+          class="w-[200px] h-[300px] object-cover orn"
+          alt=""
+        />
+      </div>
+  
+      <div class="absolute bottom-0 left-[20px]">
+        <img src="/images/orn-3.png" class="w-[200px] object-cover orn" alt="" />
+      </div>
+    </section>
+  
+    <section
+      id="doa"
+      class="relative text-center min-h-screen w-full overflow-hidden bg-[#fcf4dd] relative"
+    >
+      <p class="great-vibes text-[32px] mt-4">
+        Do'a&nbsp;&nbsp;&&nbsp;&nbsp;Ucapan
+      </p>
+  
+      <div id="cardComment" class="mt-6 w-full mb-[24px]">
+        <div class="bg-white rounded-[12px] mx-4 py-4  min-h-[800px]">
+          <form id="formUcapan" class="grid-cols-1 g-2">
+            <!-- Nama Tamu -->
+            <div class="col-span-1 w-full text-start px-4">
+              <label
+                for="name"
+                class="block text-sm font-medium leading-6 text-dark"
+                >Nama Tamu</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  autocomplete="given-name"
+                  class="w-full block rounded-md border-0 bg-white p-1.5 text-black shadow-sm ring-1 ring-inset ring-black/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <!-- Jumlah Kehadiran -->
+            <div class="col-span-1 w-full text-start px-4 mt-4">
+              <label
+                for="ucapan"
+                class="block text-sm font-medium leading-6 text-black"
+                >Doa / Ucapan</label
+              >
+              <div class="mt-2">
+                <textarea
+                  name="ucapan"
+                  id="ucapan"
+                  class="w-full block rounded-md border-0 bg-white p-1.5 text-black shadow-sm ring-1 ring-inset ring-black/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                ></textarea>
+              </div>
+            </div>
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="mx-auto mt-8 bg-[#d4afb9] text-white font-semibold py-1 px-8 rounded-[100px] shadow-xl hover:bg-[#b0576f] transition"
+            >
+              <span class="times-new-rowman" id="submitUcapanText"
+                >Kirim Ucapan</span
+              >
+            </button>
+          </form>
+          <hr class="my-4" />
+          <div class="grid-cols-1 g-2">
+            <div class="col-span-1 w-full text-start px-4">
+              <div class="bg-white rounded-[12px] mx-4 py-4">
+                <div class="grid-cols-1 g-2">
+                  <div
+                    class="col-span-1 w-full text-start px-4"
+                    id="comments-container"
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4" />
+          <!-- Pagination -->
+          <div class="flex justify-center space-x-2" id="pagination-container">
+            <button
+              class="px-1 py-1 rounded bg-gray-200 text-[10px]"
+              id="prev-button">Prev</button
+            >
+            <div id="page-buttons" class="space-x-1"></div>
+            <button
+              class="px-1 py-1 rounded bg-gray-200 text-[10px]"
+              id="next-button">Next</button
+            >
+          </div>
+        </div>
+      </div>
+  
+      <img
+        class="absolute left-0 top-[350px]"
+        src="/images/8.png"
+        alt="Decoration"
+      />
+  
+      <img
+        class="absolute right-0 top-[450px] !-scale-x-100 -z-1"
+        src="/images/8.png"
+        alt="Decoration"
+      />
+    </section>
+  
+    <div
+      id="footer"
+      class="times-new-rowman relative text-center text-white w-full overflow-hidden bg-[#d4afb9] p-6"
+    >
+      <div class="w-full text-center great-vibes text-[24px]">
+        Made with &nbsp;&nbsp;ᥫ᭡&nbsp;&nbsp;by
+        <a href="https://instagram.com/lamkhil" target="_blank">Lamkhil</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Success -->
+  <div
+    class="fixed inset-0 z-10 hidden opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 transition-opacity transition-transform duration-300 ease-out"
+    id="successModal"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Background backdrop -->
+    <div
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300 ease-out"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- Modal Content -->
+    <div class="fixed inset-0 z-20 w-screen h-screen overflow-y-auto">
+      <div
+        class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0"
+      >
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all duration-300 ease-out sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+        >
+          <!-- Content Modal -->
+          <div>
+            <div
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
+            >
+              <svg
+                class="h-6 w-6 text-green-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"></path>
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-5">
+              <h3
+                class="text-base font-semibold text-gray-900"
+                id="success-modal-title"
+              >
+                Title
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="success-modal-body">
+                  Body
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-6">
+            <button
+              type="button"
+              id="closeSuccessModal"
+              class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >Kembali</button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Loading -->
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden"
+    id="loadingModal"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Card Wrapper -->
+    <div
+      class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center space-y-4"
+    >
+      <!-- Loading Spinner -->
+      <div
+        class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-opacity-75"
+      >
+      </div>
+
+      <!-- Loading Text -->
+      <p class="text-gray-700 text-lg font-semibold">Mohon tunggu...</p>
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi -->
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden"
+    id="confirmModal"
+  >
+    <div
+      class="bg-white rounded-lg mx-4 shadow-lg p-6 flex flex-col items-center justify-center space-y-4"
+    >
+      <h2
+        id="confirm-modal-title"
+        class="text-xl font-semibold text-gray-800 mb-4"
+      >
+        Konfirmasi Kehadiran
+      </h2>
+      <p id="confirm-modal-body" class="text-gray-600 mb-4">
+        Apakah Anda yakin ingin mengonfirmasi kehadiran Anda?
+      </p>
+      <div class="flex justify-end space-x-4">
+        <button
+          id="confirm-modal-cancel"
+          class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+          >Batal</button
+        >
+        <button
+          id="confirm-modal-confirm"
+          class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+          >Ya</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Error -->
+  <div
+    class="fixed inset-0 z-10 hidden opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 transition-opacity transition-transform duration-300 ease-out"
+    id="errorModal"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Background backdrop -->
+    <div
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300 ease-out"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- Modal Content -->
+    <div class="fixed inset-0 z-20 w-screen h-screen overflow-y-auto">
+      <div
+        class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0"
+      >
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all duration-300 ease-out sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+        >
+          <!-- Content Modal -->
+          <div>
+            <div
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100"
+            >
+              <svg
+                class="h-6 w-6 text-red-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v2m0 4v.01M19 12c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z"
+                ></path>
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-5">
+              <h3
+                class="text-base font-semibold text-gray-900"
+                id="error-modal-title"
+              >
+                Terjadi Kesalahan
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="error-modal-body">
+                  Kami mengalami kesulitan dalam mengonfirmasi kehadiran Anda.
+                  Silakan coba lagi nanti.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-6">
+            <button
+              type="button"
+              id="closeErrorModal"
+              class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="backgroundMusic" loop>
+    <source src="/music.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div
+    class="fixed bottom-4 left-1/2 transform -translate-x-1/2 max-w-[480px] w-full z-[99999]"
+  >
+    <img
+      src="/music.png"
+      alt="pause"
+      class="pause-music mx-4 h-[52px] w-[52px] hidden"
+      id="musicIcon"
+    />
+  </div>
 </Layout>
+
+<style>
+  .bg {
+    background-image: url("/images/7.jpeg");
+    background-size: cover;
+    background-position: center;
+  }
+  section {
+    background-image: url("/images/bg.png");
+    background-blend-mode: multiply;
+  }
+
+  @keyframes berputar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Elemen yang akan berputar */
+  .pause-music {
+    animation: berputar 2s linear infinite; /* memulai animasi */
+    cursor: pointer;
+  }
+</style>
+
+<!-- NAMA UNDANGAN -->
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get("name");
+
+  if (name) {
+    document.getElementById("name")!.innerText = name;
+    document.querySelectorAll("input[name='name']").forEach((el) => {
+      el.setAttribute("value", name);
+    });
+  } else {
+    document.getElementById("dear")!.innerText = "";
+  }
+</script>
+
+<!-- Calender Clik -->
+<script>
+  document
+    .getElementById("add-calendar")!
+    .addEventListener("click", function () {
+      window.open(
+        "https://calendar.google.com/calendar/u/0/r/eventedit?text=Resepsi%20Pernikahan%20Mike%20Syahriana%20%26%20Suhandani&dates=20241222T030000Z/20241222T060000Z&details=Jangan%20lupa%20hadir%20di%20resepsi%20kami!%20Informasi%20lokasi%20%3A%20https%3A%2F%2Fwww.google.com%2Fmaps%2Fplace%2F%40-7.6281014%2C110.447333%2C17.42z&location=-7.6281014%2C110.447333",
+        "_blank",
+      );
+    });
+</script>
+
+<!-- View Maps -->
+<script>
+  document.getElementById("view-maps")!.addEventListener("click", function () {
+    window.open(
+      "https://maps.app.goo.gl/vLJa3pZysHAbK1GC9",
+      "_blank",
+    );
+  });
+</script>
+
+<!-- Open Invitation -->
+<script>
+  const openInvitation = document.getElementById("open-invitation")!;
+  const audio = document.getElementById("backgroundMusic")! as HTMLAudioElement;
+  const musicIcon = document.getElementById("musicIcon")!;
+  openInvitation.addEventListener("click", () => {
+
+    const mainSection = document.getElementById("content")!;
+    mainSection.classList.remove("hidden");
+    musicIcon.classList.remove("hidden");
+
+    mainSection.scrollIntoView({ behavior: "smooth" });
+
+    audio.play();
+  });
+
+  musicIcon.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      musicIcon.classList.add("pause-music");
+    } else {
+      audio.pause();
+      musicIcon.classList.remove("pause-music");
+    }
+  });
+</script>
+<!-- Core -->
+<script>
+  import {
+    addRsvpRecord,
+    getRsvpRecord,
+    addUcapanRecord,
+    getUcapanById,
+    getUcapanRecords,
+    getStory,
+    getGifts,
+  } from "@components/firebase.client";
+  import { v4 as uuidv4 } from "uuid";
+  import moment from "moment";
+  import "moment/locale/id"; // Bahasa Indonesia
+
+  const successModal = document.getElementById("successModal")!;
+  const closeSuccessModalButton = document.getElementById("closeSuccessModal")!;
+  const confirmModal = document.getElementById("confirmModal")!;
+  const cancelBtn = document.getElementById("confirm-modal-cancel")!;
+  const confirmBtn = document.getElementById(
+    "confirm-modal-confirm",
+  )! as HTMLButtonElement;
+
+  const errorModal = document.getElementById("errorModal")!;
+
+  // Fungsi untuk menghasilkan ID unik
+  const getBrowserId = () => {
+    let browserId = localStorage.getItem("browserId");
+
+    // Jika tidak ada ID, buat ID baru
+    if (!browserId) {
+      browserId = uuidv4(); // Membuat ID acak
+      localStorage.setItem("browserId", browserId);
+    }
+    return browserId;
+  };
+
+  const formUcapan = document.getElementById("formUcapan")! as HTMLFormElement;
+
+  const ucapanData = await getUcapanById(getBrowserId());
+
+  if (ucapanData) {
+    const nameInput = formUcapan.querySelector(
+      'input[name="name"]',
+    ) as HTMLInputElement;
+    const ucapanInput = formUcapan.querySelector(
+      'textarea[name="ucapan"]',
+    ) as HTMLTextAreaElement;
+
+    // Mengisi nilai form
+    if (nameInput) nameInput.value = ucapanData.name || "";
+    if (ucapanInput) ucapanInput.value = ucapanData.ucapan || "";
+
+    document.getElementById("submitUcapanText")!.innerText = "Update";
+  }
+
+  formUcapan.addEventListener("submit", (event) => {
+    event.preventDefault();
+    handleUcapanSubmit(event);
+  });
+  // Menambahkan tipe pada parameter 'event'
+  async function handleUcapanSubmit(event: SubmitEvent) {
+    // Ambil data dari form
+    const formData = new FormData(event.target as HTMLFormElement);
+    const formObject = Object.fromEntries(formData.entries());
+    formObject.id = getBrowserId();
+
+    console.log("Data diterima: ", formObject);
+
+    // Menampilkan dialog konfirmasi
+    document.getElementById("confirm-modal-title")!.innerText =
+      "Konfirmasi Doa / Ucapan";
+    document.getElementById("confirm-modal-body")!.innerHTML =
+      "Apakah Anda yakin ingin mengirimkan Doa / Ucapan Anda dengan data berikut?<br><strong>Nama:</strong> " +
+      formObject.name +
+      "<br><strong>Ucapan:</strong> " +
+      formObject.ucapan;
+
+    // Show confirmation modal
+    confirmModal.classList.remove("hidden");
+
+    // Prevent multiple clicks by using a flag to track confirmation
+    let confirmed = false;
+
+    // Function for confirm button click
+    const handleConfirmClick = async () => {
+      // Disable the confirm button to prevent repeated clicks
+      confirmBtn.disabled = true;
+
+      if (confirmed) {
+        return; // If already confirmed, do nothing
+      }
+
+      confirmed = true; // Set the confirmed flag to prevent multiple submissions
+      confirmBtn.removeEventListener("click", handleConfirmClick); // Remove the event listener to prevent multiple submissions
+
+      // Hide the confirmation modal
+      confirmModal.classList.add("hidden");
+
+      showLoadingModal(); // Show loading modal
+
+      try {
+        // Simulate sending data (uncomment the actual submission code in production)
+        console.log("Data berhasil dikirim: ", formObject);
+
+        await addUcapanRecord(formObject);
+        await refreshDoaUcapan();
+
+        closeLoadingModal(); // Close loading modal
+        showSuccessModal(
+          "Berhasil",
+          "Terima kasih atas doa dan ucapan yang telah Anda kirimkan. Semoga doa dan ucapan Anda menjadi berkah bagi kami. Terima kasih atas doa dan dukungan Anda.",
+        );
+
+        document.getElementById("submitUcapanText")!.innerText = "Update";
+      } catch (e) {
+        console.error("Terjadi kesalahan: ", e);
+        showErrorModal(
+          "Gagal",
+          "Terjadi kesalahan saat mengonfirmasi kehadiran Anda.",
+        );
+      } finally {
+        confirmBtn.disabled = false; // Re-enable the confirm button after the process
+      }
+    };
+
+    // Add the event listener for the confirm button
+    confirmBtn.addEventListener("click", handleConfirmClick);
+
+    // Cancel button event listener to close the modal
+    cancelBtn.addEventListener("click", function () {
+      confirmModal.classList.add("hidden"); // If canceled, close the modal
+      confirmBtn.removeEventListener("click", handleConfirmClick); // Clean up the event listener
+    });
+  }
+
+  closeSuccessModalButton.addEventListener("click", () => {
+    closeSuccessModal();
+  });
+
+  function showLoadingModal() {
+    const loadingModal = document.getElementById("loadingModal")!;
+    loadingModal.classList.remove("hidden");
+
+    // Apply entering animations
+    setTimeout(() => {
+      loadingModal.classList.remove("opacity-0");
+      loadingModal.classList.add("opacity-100");
+    }, 100); // Small delay to trigger transition
+  }
+
+  // Menampilkan modal error
+  function showErrorModal(title: string, message: string) {
+    const errorModalTitle = document.getElementById("error-modal-title")!;
+    const errorModalBody = document.getElementById("error-modal-body")!;
+
+    errorModalTitle.innerText = title;
+    errorModalBody.innerText = message;
+
+    errorModal.classList.remove("hidden");
+    errorModal.classList.add("opacity-100", "translate-y-0", "sm:scale-100");
+  }
+
+  function closeLoadingModal() {
+    const loadingModal = document.getElementById("loadingModal")!;
+    loadingModal.classList.add("opacity-0");
+
+    // Hide modal after animation
+    setTimeout(() => {
+      loadingModal.classList.add("hidden");
+    }, 100); // Match this with the duration in the Tailwind classes
+  }
+
+  function showSuccessModal(title: string, body: string) {
+    const modalTitle = document.getElementById("success-modal-title")!;
+    const modalBody = document.getElementById("success-modal-body")!;
+    modalTitle.innerText = title;
+    modalBody.innerText = body;
+    successModal.classList.remove("hidden");
+
+    // Apply entering animations
+    setTimeout(() => {
+      successModal.classList.remove(
+        "opacity-0",
+        "translate-y-4",
+        "sm:scale-95",
+      );
+      successModal.classList.add(
+        "opacity-100",
+        "translate-y-0",
+        "sm:scale-100",
+      );
+    }, 100); // Small delay to trigger transition
+  }
+
+  function closeSuccessModal() {
+    // Apply leaving animations
+    successModal.classList.add("opacity-0", "translate-y-4", "sm:scale-95");
+    successModal.classList.remove(
+      "opacity-100",
+      "translate-y-0",
+      "sm:scale-100",
+    );
+
+    // Hide modal after animation
+    setTimeout(() => {
+      successModal.classList.add("hidden");
+    }, 100); // Match this with the duration in the Tailwind classes
+  }
+
+  let items = await getUcapanRecords(); // 200 items
+  let currentPage = 1;
+  const itemsPerPage = 10;
+  let totalPages = Math.ceil(items.length / itemsPerPage);
+
+  const commentsContainer = document.getElementById("comments-container")!;
+  const pageButtonsContainer = document.getElementById("page-buttons")!;
+  const prevButton = document.getElementById("prev-button")!;
+  const nextButton = document.getElementById("next-button")!;
+
+  function renderComments() {
+    commentsContainer.innerHTML = "";
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = currentPage * itemsPerPage;
+    const currentItems = items.slice(start, end);
+
+    currentItems.forEach((item: any, index: number) => {
+      const commentDiv = document.createElement("div");
+      commentDiv.innerHTML = `
+        <p class="text-[14px] text-[#6E0505] font-bold text-md">${item.name}</p>
+        <p class="text-[8px] font-thin text-gray-400 mb-2">${formatTimestampToRelativeTime(item.createdAt.toDate())}</p>
+        <p class="text-[14px] text-xs">${item.ucapan}</p>
+        <hr class="my-4" />
+      `;
+      commentsContainer.appendChild(commentDiv);
+    });
+
+    renderPagination();
+  }
+
+  function formatTimestampToRelativeTime(timestamp: Date) {
+    // Set locale ke Bahasa Indonesia
+    moment.locale("id");
+    return moment(timestamp).fromNow(); // Menampilkan dalam format relatif
+  }
+
+  function renderPagination() {
+    pageButtonsContainer.innerHTML = "";
+    const maxPagesToShow = 3;
+    const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+
+    let startPage = Math.max(currentPage - halfMaxPagesToShow, 1);
+    let endPage = Math.min(currentPage + halfMaxPagesToShow, totalPages);
+
+    if (currentPage <= halfMaxPagesToShow) {
+      endPage = Math.min(maxPagesToShow, totalPages);
+    }
+
+    if (currentPage + halfMaxPagesToShow >= totalPages) {
+      startPage = Math.max(totalPages - maxPagesToShow + 1, 1);
+    }
+
+    if (startPage > 1) {
+      const firstPageButton = document.createElement("button");
+      firstPageButton.className = `px-2 py-2 rounded text-[8px] ${currentPage === 1 ? "bg-blue-500 text-white" : "bg-gray-200"}`;
+      firstPageButton.innerText = "1";
+      firstPageButton.addEventListener("click", () => handlePageChange(1));
+      pageButtonsContainer.appendChild(firstPageButton);
+
+      const startEllipsis = document.createElement("span");
+      startEllipsis.innerText = "...";
+      pageButtonsContainer.appendChild(startEllipsis);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const pageButton = document.createElement("button");
+      pageButton.className = `px-2 py-2 rounded text-[8px] ${currentPage === i ? "bg-blue-500 text-white" : "bg-gray-200"}`;
+      pageButton.innerText = i.toString();
+      pageButton.addEventListener("click", () => handlePageChange(i));
+      pageButtonsContainer.appendChild(pageButton);
+    }
+
+    if (endPage < totalPages) {
+      const endEllipsis = document.createElement("span");
+      endEllipsis.innerText = "...";
+      pageButtonsContainer.appendChild(endEllipsis);
+
+      const lastPageButton = document.createElement("button");
+      lastPageButton.className = `px-2 py-2 rounded text-[8px] ${currentPage === totalPages ? "bg-blue-500 text-white" : "bg-gray-200"}`;
+      lastPageButton.innerText = totalPages.toString();
+      lastPageButton.addEventListener("click", () =>
+        handlePageChange(totalPages),
+      );
+      pageButtonsContainer.appendChild(lastPageButton);
+    }
+  }
+
+  function handlePageChange(page: number) {
+    currentPage = page;
+    renderComments();
+    renderPagination();
+  }
+
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
+    }
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
+    }
+  });
+
+  async function refreshDoaUcapan() {
+    items = await getUcapanRecords();
+    totalPages = Math.ceil(items.length / itemsPerPage);
+    renderComments();
+    renderPagination();
+  }
+
+  // Initial render
+  renderComments();
+</script>
